@@ -1,3 +1,8 @@
+use crate::dataset;
+
+use dataset::DataSet;
+
+
 pub fn calculate_cost(b: &f64, w: &f64, data: &DataSet) -> f64 {
   let sum: f64 = data.input.iter()
   .zip(data.output.iter())

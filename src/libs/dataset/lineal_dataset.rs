@@ -32,8 +32,8 @@ impl DataSet {
     /// A DataSet containing the parsed input and output data. Returns an empty
     /// DataSet if file reading fails or the file is empty.
     pub fn new(path: &Path) -> DataSet {
-        /// Attempt to read lines from the file.
-        if let Ok(lines) = read_lines(path) {
+        // Attempt to read lines from the file.
+        if let Ok(lines) = DataSet::read_lines(path) {
             // Initialize vectors to store parsed data.
             let mut input_vec = Vec::new();
             let mut output_vec = Vec::new();
@@ -94,6 +94,7 @@ impl DataSet {
     /// let mut dataset = DataSet::new("data.csv");
     /// dataset.add_row(2.5, 4.1); // Add a new data point
     /// ```
+    #[allow(dead_code)]
     fn add_row(&mut self, input: f64, output: f64) {
         self.input.push(input);
         self.output.push(output);
@@ -128,10 +129,11 @@ impl DataSet {
     where
         P: AsRef<Path>,
     {
-        /// Open the file using `File::open()` and handle potential errors.
+        // Open the file using `File::open()` and handle potential errors.
         let file = File::open(filename)?;
 
-        /// Create a buffered reader for efficient line-by-line reading.
+        // Create a buffered reader for efficient line-by-line reading.
         Ok(io::BufReader::new(file).lines())
     }
 }
+

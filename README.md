@@ -4,6 +4,21 @@
 
 This project implements a linear regression model in Rust, capable of fitting a line to a set of data points and making predictions based on the learned model.
 
+## Routemap
+
+- [x] import data from csv files
+- [x] create model trait structure
+- [x] create lineal regression model with one variable
+- [x] gradient_descent algorithm
+- [ ] create data normalization
+- [ ] create data standardization
+- [ ] create statistics module
+- [ ] create lineal regression model with multiple variables
+- [ ] create logistic regression model
+- [ ] create neural network model
+- [ ] create backpropagatrion algorithm
+- more items will be added in the future
+  
 ## Key Features
 
 - **Dataset loading:** Loads data from CSV files using a custom `DataSet` struct.

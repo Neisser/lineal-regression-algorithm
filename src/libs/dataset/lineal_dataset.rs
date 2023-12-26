@@ -136,7 +136,18 @@ impl DataSet {
         Ok(io::BufReader::new(file).lines())
     }
 
-    /// Normalizes the input and output values of the DataSet.
+    /// Normalizes the input and output values of a `DataSet` by subtracting the mean and dividing by the standard deviation.
+    ///
+    /// # Arguments
+    ///
+    /// * `self`: A mutable reference to the `DataSet` object.
+    ///
+    /// # Example usage
+    ///
+    /// ```rust
+    /// let mut data = DataSet::new(...);
+    /// data.normalize();
+    /// ```
     pub fn normalize(&mut self) {
         // Calculate the mean of the input and output values.
         let input_mean: f64 = self.input.iter().sum::<f64>() / self.size as f64;

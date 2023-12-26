@@ -19,8 +19,8 @@ fn main() {
     let mut model = LinealRegression::new(
         data,
         LinealRegressionOptions {
-            epochs: 100,
-            learning_rate: 0.000001,
+            epochs: 1000,
+            learning_rate: 0.01,
         },
     );
 
@@ -29,6 +29,15 @@ fn main() {
     println!("b: {}", model.b);
     println!("w: {}", model.w);
     println!("cost: {}", model.cost);
-    println!("predict: {:?}", model.predict(1.0)); 
+
+    let test_path: &Path = Path::new("test.csv");
+
+    let test_data: DataSet = DataSet::new(test_path);
+
+    let test_inputs = test_data.input;
+
+    for value in test_inputs {
+        println!("predict {}: {:?}", value, model.predict(value).unwrap()); 
+    }
 
 }

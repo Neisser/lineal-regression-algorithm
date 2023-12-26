@@ -20,6 +20,7 @@ fn main() {
         LinealRegressionOptions {
             epochs: 1000, // Number of training iterations
             learning_rate: 0.01, // Step size for gradient descent
+            nornalize: false, // Normalize the data before training
         },
     );
 

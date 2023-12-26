@@ -6,6 +6,7 @@ use super::model::Model;
 pub struct LinealRegressionOptions {
     pub epochs: u32,
     pub learning_rate: f64,
+    pub nornalize: bool,
 }
 
 pub struct LinealRegression {
@@ -41,6 +42,11 @@ impl LinealRegression {
 
 impl Model<f64, f64> for LinealRegression {
     fn fit(&mut self) -> Result<(), Box<dyn std::error::Error>> {
+
+      if self.options.nornalize {
+        // Normalize training data
+        self.training_data.normalize();
+      }
       
       let (b, w) = gradient_descent(self.options.epochs, self.options.learning_rate, &self.b, &self.w, &self.training_data);
       

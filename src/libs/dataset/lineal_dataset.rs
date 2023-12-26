@@ -35,8 +35,8 @@ impl DataSet {
         // Attempt to read lines from the file.
         if let Ok(lines) = DataSet::read_lines(path) {
             // Initialize vectors to store parsed data.
-            let mut input_vec = Vec::new();
-            let mut output_vec = Vec::new();
+            let mut input_vec: Vec<f64> = Vec::new();
+            let mut output_vec: Vec<f64> = Vec::new();
 
             // Iterate through each line and parse it.
             for line in lines {
@@ -45,13 +45,13 @@ impl DataSet {
                     let line: Vec<&str> = ip.split(",").collect();
 
                     // Parse the output value (first element).
-                    let output = match line[0].parse() {
+                    let output: f64 = match line[0].parse() {
                         Ok(num) => num,
                         Err(_) => continue, // Skip invalid lines
                     };
 
                     // Parse the input value (second element).
-                    let input = match line[1].parse() {
+                    let input: f64 = match line[1].parse() {
                         Ok(num) => num,
                         Err(_) => continue, // Skip invalid lines
                     };
@@ -135,5 +135,41 @@ impl DataSet {
         // Create a buffered reader for efficient line-by-line reading.
         Ok(io::BufReader::new(file).lines())
     }
+
+    /// Normalizes the input and output values of the DataSet.
+    pub fn normalize(&mut self) {
+        // Calculate the mean of the input and output values.
+        let input_mean: f64 = self.input.iter().sum::<f64>() / self.size as f64;
+        let output_mean: f64 = self.output.iter().sum::<f64>() / self.size as f64;
+
+        // Calculate the standard deviation of the input and output values.
+        let input_std_dev: f64 = self
+            .input
+            .iter()
+            .map(|x: &f64| (x - input_mean).powf(2.0))
+            .sum::<f64>()
+            .sqrt()
+            / self.size as f64;
+        let output_std_dev: f64 = self
+            .output
+            .iter()
+            .map(|x: &f64| (x - output_mean).powf(2.0))
+            .sum::<f64>()
+            .sqrt()
+            / self.size as f64;
+
+        // Normalize the input and output values.
+        self.input = self
+            .input
+            .iter()
+            .map(|x: &f64| (x - input_mean) / input_std_dev)
+            .collect();
+        self.output = self
+            .output
+            .iter()
+            .map(|x: &f64| (x - output_mean) / output_std_dev)
+            .collect();
+    }
+
 }
 

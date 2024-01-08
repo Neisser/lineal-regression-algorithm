@@ -10,14 +10,6 @@ This project implements a linear regression model in Rust, capable of fitting a 
 - [x] create model trait structure
 - [x] create lineal regression model with one variable
 - [x] gradient_descent algorithm
-- [ ] create data normalization
-- [ ] create data standardization
-- [ ] create statistics module
-- [ ] create lineal regression model with multiple variables
-- [ ] create logistic regression model
-- [ ] create neural network model
-- [ ] create backpropagatrion algorithm
-- more items will be added in the future
   
 ## Key Features
 
